@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Vehicle>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<div ng-app="Garage">
+    <div ng-controller="IndexController" ng-cloak>
+
+        <h2>Index</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Owner.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VehicleType.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegNr)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Color)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="v in Vehicles">
+                    <td>{{v.Owner.Name}}</td>
+                    <td>{{v.VehicleType.Name}}</td>
+                    <td>{{v.RegNr}}</td>
+                    <td>{{v.Color}}</td>
+                    <td>
+                        <a href="/Edit/{{v.Id}}">Edit</a>
+                        <a href="/Details/{{v.Id}}">Details</a>
+                        <a href="/Delete/{{v.Id}}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
