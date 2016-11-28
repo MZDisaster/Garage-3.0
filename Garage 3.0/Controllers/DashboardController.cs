@@ -71,7 +71,7 @@ namespace Garage_3._0.Controllers
             }
             ViewBag.OwnerId = owners;
 
-            return View(new VehicleCreateViewModel());
+            return PartialView("CreateVehicle", new VehicleCreateViewModel());
         }
 
         // POST: Dashboard/Create

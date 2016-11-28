@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-Garage.controller("IndexController",
-    function IndexController($scope, getVehicles, getVehicleTypes, getCreatePage) {
+Garage.controller("IndexController", ['$scope', 'getVehicles', 'getVehicleTypes',
+    function IndexController($scope, getVehicles, getVehicleTypes) {
 
         // Sorting Start
         $scope.sortorder = 'Owner.Name';
@@ -19,7 +19,7 @@ Garage.controller("IndexController",
 
         getVehicleTypes.then(function (data) {
             $scope.vehicleTypes = data;
-            console.log($scope.vehicleTypes);
+            //console.log($scope.vehicleTypes);
         });
 
         getVehicles.then(function (data) {
@@ -27,8 +27,6 @@ Garage.controller("IndexController",
             //console.log("Controller Log Start!\n" + $scope.Vehicles + "\n Controller Log End!");
         });
 
-        $scope.OpenCreateModal = function () {
-
-        };
-    }
+        
+    }]
 );

@@ -137,6 +137,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\GarageDB.mdf" />
+    <Content Include="App_Data\GarageDBOld.mdf" />
+    <Content Include="App_Data\GarageDBOld_log.ldf">
+      <DependentUpon>GarageDBOld.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\GarageDB_log.ldf">
       <DependentUpon>GarageDB.mdf</DependentUpon>
     </Content>
@@ -963,7 +967,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -983,7 +989,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Dashboard\List.cshtml" />
-    <Content Include="Views\Dashboard\Create.cshtml" />
+    <Content Include="Views\Dashboard\CreateVehicle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
