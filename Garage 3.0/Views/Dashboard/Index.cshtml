@@ -12,9 +12,23 @@
         <h2>Index</h2>
 
         <p>
-            @Html.ActionLink("Create New", "Create")
+            <a role="button" class="btn btn-primary" ng-click="OpenCreateModal()"></a>
         </p>
+        Orderby :
+        <select ng-model="sortorder" class="input-sm">
+            <option ng-selected= "{{value.Value == defaultSelectedOption}}"
+                    ng-repeat="option in sortOptions" value="{{option.Value}}">{{option.Name}}</option>
+        </select>
 
+        Filter :
+        <select ng-model="VehicleTypeFilter" class="input-sm">
+            <option selected value="">All</option>
+            <option ng-repeat="type in vehicleTypes" value="{{type.Name}}">
+                {{type.Name}}
+            </option>
+        </select>
+        
+        <input type="text" ng-model="SearchFilter" class="form-control" placeholder="Search"/>
         <table class="table">
             <thead>
                 <tr>
@@ -35,7 +49,7 @@
             </thead>
 
             <tbody>
-                <tr ng-repeat="v in Vehicles">
+                <tr ng-repeat="v in Vehicles | orderBy:sortorder | filter:VehicleTypeFilter | filter:SearchFilter">
                     <td>{{v.Owner.Name}}</td>
                     <td>{{v.VehicleType.Name}}</td>
                     <td>{{v.RegNr}}</td>
@@ -49,4 +63,8 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<div id="ModalContainer" ng-controller="ModalController">
+    {{Modal}}
 </div>

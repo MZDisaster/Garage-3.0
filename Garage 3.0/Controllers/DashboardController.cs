@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Garage_3._0.Models;
+using Garage_3._0.ViewModels;
 
 namespace Garage_3._0.Controllers
 {
@@ -12,11 +16,31 @@ namespace Garage_3._0.Controllers
     {
         public GarageRepo GRepo = new GarageRepo();
 
+        JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+
         public JsonResult Vehicles()
         {
-            var result = GRepo.getVehicles().SerializeObject();
+            var Vehicles = GRepo.getVehicles();
+
+            
+            var result = JsonConvert.SerializeObject(Vehicles, Formatting.Indented, jss);
+            
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult VehicleTypes()
+        {
+            var result = JsonConvert.SerializeObject(GRepo.getVehicleTypes(), Formatting.Indented, jss);
+            
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Dashboard
+        public ActionResult List()
+        {
+            return View(GRepo.getVehicles());
+        }
+
 
         // GET: Dashboard
         public ActionResult Index()
@@ -33,16 +57,30 @@ namespace Garage_3._0.Controllers
         // GET: Dashboard/Create
         public ActionResult Create()
         {
-            return View();
+            List<SelectListItem> types = new List<SelectListItem>();
+            foreach (VehicleType t in GRepo.getVehicleTypes())
+            {
+                types.Add(new SelectListItem() { Text = t.Name, Value = t.Id.ToString() });
+            }
+            ViewBag.VehicleTypeId = types;
+
+            List<SelectListItem> owners = new List<SelectListItem>();
+            foreach (Owner o in GRepo.GetOwners())
+            {
+                owners.Add(new SelectListItem() { Text = o.Name, Value = o.Id.ToString() });
+            }
+            ViewBag.OwnerId = owners;
+
+            return View(new VehicleCreateViewModel());
         }
 
         // POST: Dashboard/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include = "RegNr, Color, OwnerId, VehicleTypeId")]VehicleCreateViewModel newVehicle)
         {
             try
             {
-                // TODO: Add insert logic here
+                GRepo.AddVehicle(newVehicle);
 
                 return RedirectToAction("Index");
             }

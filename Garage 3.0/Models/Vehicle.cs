@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,10 +19,12 @@ namespace Garage_3._0.Models
         [Required]
         public string Color { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("Owner")]
         [Required]
         public int OwnerId { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("VehicleType")]
         [Required]
         public int VehicleTypeId { get; set; }

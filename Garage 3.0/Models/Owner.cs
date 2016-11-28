@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace Garage_3._0.Models
 {
@@ -16,5 +17,8 @@ namespace Garage_3._0.Models
 
         [Required]
         public string PNR { get; set; }
+
+        [JsonIgnore]
+        public virtual List<Vehicle> Vehicles { get; set; }
     }
 }

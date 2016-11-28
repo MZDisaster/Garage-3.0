@@ -29,14 +29,13 @@ namespace Garage_3._0
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                 "~/Scripts/angular.js",
-                "~/Scripts/angular-*",
-                "~/Scripts/angular-ui/ui-*"));
+                "~/Scripts/angular-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/garage").Include(
-                "~/Scripts/Garage/*.js",
-                "~/Scripts/Garage/controllers/*.js",
-                "~/Scripts/Garage/directives/*.js",
-                "~/Scripts/Garage/services/*.js"
+                "~/Garage/*.js",
+                "~/Garage/services/*.js",
+                "~/Garage/controllers/*.js",
+                "~/Garage/directives/*.js"
                 ));
         }
     }
