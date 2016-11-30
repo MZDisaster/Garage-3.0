@@ -6,13 +6,13 @@
 }
 
 
-<div ng-app="Garage">
+<div>
     <div ng-controller="IndexController" ng-cloak>
 
         <h2>Index</h2>
         <div ng-controller="ModalController">
-            <a role="button" class="btn btn-primary" ng-click="$broadcast('OpenCreateVehicleModal')" show-modal>New Vehicle</a>
-            <a role="button" class="btn btn-primary" ng-click="$broadcast('OpenCreateOwnerModal')" show-modal>New Owner</a>
+            <a role="button" class="btn btn-primary" ng-click="OpenCreateVehicleModal()" show-modal>New Vehicle</a>
+            <a role="button" class="btn btn-primary" ng-click="OpenCreateOwnerModal()" show-modal>New Owner</a>
         </div>
         Orderby :
         <select ng-model="sortorder" class="input-sm">
@@ -62,11 +62,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div id="ModalContainer" ng-controller="ModalController">
-        <div ng-bind-html="Modal">
-
-        </div>
     </div>
 </div>

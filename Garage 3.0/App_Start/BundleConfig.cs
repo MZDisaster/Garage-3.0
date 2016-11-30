@@ -34,8 +34,9 @@ namespace Garage_3._0
             bundles.Add(new ScriptBundle("~/bundles/garage").Include(
                 "~/Garage/*.js",
                 "~/Garage/services/*.js",
-                "~/Garage/controllers/*.js",
-                "~/Garage/directives/*.js"
+                "~/Garage/directives/*.js",
+                "~/Garage/filters/*.js",
+                "~/Garage/controllers/*.js"
                 ));
         }
     }

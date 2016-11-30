@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-Garage.controller("IndexController", ['$scope', 'getVehicles', 'getVehicleTypes',
-    function IndexController($scope, getVehicles, getVehicleTypes) {
+Garage.controller("IndexController", ['$scope', '$sce', 'getVehicles', 'getVehicleTypes', 'ModalService', 'getCreateVehiclePage', 'getCreatePersonPage',
+    function IndexController($scope, $sce, getVehicles, getVehicleTypes, ModalService, getCreateVehiclePage, getCreatePersonPage) {
 
         // Sorting Start
         $scope.sortorder = 'Owner.Name';
@@ -13,6 +13,24 @@ Garage.controller("IndexController", ['$scope', 'getVehicles', 'getVehicleTypes'
             { 'Name': 'Registration Number', 'Value': 'RegNr' },
             { 'Name': 'Color', 'Value': 'Color' }
         ];
+
+        $scope.OpenCreateVehicleModal = function () {
+            console.log('clicked');
+            getCreateVehiclePage.then(function (data) {
+                ModalService.setModalTitle('Create Vehicle');
+                ModalService.setModal(data);//$sce.trustAsHtml(data);
+                jQuery('#ModalContainer').modal('toggle');
+                console.log(ModalService);
+            });
+        };
+
+        $scope.OpenCreateOwnerModal = function () {
+            getCreatePersonPage.then(function (data) {
+                ModalService.setModalTitle('Create Owner');
+                ModalService.setModal(data);
+                jQuery('#ModalContainer').modal('toggle');
+            });
+        };
         
         $scope.defaultSelectedOption = $scope.sortOptions[0].Value;
         // Sorting End
