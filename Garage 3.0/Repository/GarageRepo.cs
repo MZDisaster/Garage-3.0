@@ -36,6 +36,14 @@ namespace Garage_3._0.Repository
             GContext.SaveChanges();
         }
 
+        public void AddOwner(Owner owner)
+        {
+            GContext.Owners.Add(owner);
+            GContext.SaveChanges();
+        }
+
+
+
         public IEnumerable<Owner> GetOwners()
         {
             return GContext.Set<Owner>();

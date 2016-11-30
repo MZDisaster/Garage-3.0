@@ -1,18 +1,16 @@
 ﻿@model Garage_3._0.ViewModels.VehicleCreateViewModel
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("CreateVehicle", "Dashboard", new { id = "modalForm", ng_controller = "CreateVehicleFormController"}))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Vehicle</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.RegNr, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RegNr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.RegNr, new { htmlAttributes = new { @class = "form-control", ng_model = "Vehicle.RegNr" } })
                 @Html.ValidationMessageFor(model => model.RegNr, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -20,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control", ng_model = "Vehicle.Color" } })
                 @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OwnerId, "OwnerId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OwnerId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OwnerId", null, htmlAttributes: new { @class = "form-control", ng_model = "Vehicle.OwnerId"})
                 @Html.ValidationMessageFor(model => model.OwnerId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,22 +34,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VehicleTypeId, "VehicleTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("VehicleTypeId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("VehicleTypeId", null, htmlAttributes: new { @class = "form-control", ng_model = "Vehicle.VehicleType" })
                 @Html.ValidationMessageFor(model => model.VehicleTypeId, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+            <a class="btn btn-info" ng-model="createthevehicle()">Submit</a>
     </div>
+    
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -54,8 +54,9 @@ namespace Garage_3._0.Controllers
             return View();
         }
 
+
         // GET: Dashboard/Create
-        public ActionResult Create()
+        public ActionResult CreatePerson()
         {
             List<SelectListItem> types = new List<SelectListItem>();
             foreach (VehicleType t in GRepo.getVehicleTypes())
@@ -76,7 +77,43 @@ namespace Garage_3._0.Controllers
 
         // POST: Dashboard/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "RegNr, Color, OwnerId, VehicleTypeId")]VehicleCreateViewModel newVehicle)
+        public ActionResult CreatePerson([Bind(Include = "Name, PNR")]Owner newOwner)
+        {
+            try
+            {
+                GRepo.AddOwner(newOwner);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Dashboard/Create
+        public ActionResult CreateVehicle()
+        {
+            List<SelectListItem> types = new List<SelectListItem>();
+            foreach (VehicleType t in GRepo.getVehicleTypes())
+            {
+                types.Add(new SelectListItem() { Text = t.Name, Value = t.Id.ToString() });
+            }
+            ViewBag.VehicleTypeId = types;
+
+            List<SelectListItem> owners = new List<SelectListItem>();
+            foreach (Owner o in GRepo.GetOwners())
+            {
+                owners.Add(new SelectListItem() { Text = o.Name, Value = o.Id.ToString() });
+            }
+            ViewBag.OwnerId = owners;
+
+            return PartialView("CreateVehicle", new VehicleCreateViewModel());
+        }
+
+        // POST: Dashboard/Create
+        [HttpPost]
+        public ActionResult CreateVehicle([Bind(Include = "RegNr, Color, OwnerId, VehicleTypeId")]VehicleCreateViewModel newVehicle)
         {
             try
             {

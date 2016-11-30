@@ -151,11 +151,13 @@
     <Content Include="Content\dashboard.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Garage\controllers\CreateVehicleFormController.js" />
     <Content Include="Garage\controllers\ModalController.js" />
     <Content Include="Garage\services\getCreatePage.js" />
     <Content Include="Garage\services\GetVehicleTypes.js" />
     <Content Include="Garage\services\GetVehicles.js" />
     <Content Include="Garage\services\ModalService.js" />
+    <Content Include="Garage\services\PostNew.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular-animate.js" />

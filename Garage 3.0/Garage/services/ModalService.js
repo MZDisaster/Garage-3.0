@@ -4,6 +4,9 @@
 Garage.factory('ModalService', function () {
     var ModalService = {};
 
+    ModalService.ModalTitle = '';
+    ModalService.ModalBody = '';
+
     ModalService.setModal = function (data) {
         this.ModalBody = data;
     };
@@ -11,10 +14,6 @@ Garage.factory('ModalService', function () {
     ModalService.setModalTitle = function (data) {
         this.ModalTitle = data;
     };
-
-    ModalService.ModalTitle = '';
-    ModalService.ModalBody = '';
-
 
     return ModalService;
 });

@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-Garage.controller("IndexController", ['$scope', '$sce', 'getVehicles', 'getVehicleTypes', 'ModalService', 'getCreateVehiclePage', 'getCreatePersonPage',
-    function IndexController($scope, $sce, getVehicles, getVehicleTypes, ModalService, getCreateVehiclePage, getCreatePersonPage) {
+Garage.controller("IndexController", ['$scope', '$rootScope', '$sce', 'getVehicles', 'getVehicleTypes', 'ModalService', 'getCreateVehiclePage', 'getCreatePersonPage',
+    function IndexController($scope, $rootScope, $sce, getVehicles, getVehicleTypes, ModalService, getCreateVehiclePage, getCreatePersonPage) {
 
         // Sorting Start
         $scope.sortorder = 'Owner.Name';
@@ -15,12 +15,10 @@ Garage.controller("IndexController", ['$scope', '$sce', 'getVehicles', 'getVehic
         ];
 
         $scope.OpenCreateVehicleModal = function () {
-            console.log('clicked');
             getCreateVehiclePage.then(function (data) {
                 ModalService.setModalTitle('Create Vehicle');
                 ModalService.setModal(data);//$sce.trustAsHtml(data);
-                jQuery('#ModalContainer').modal('toggle');
-                console.log(ModalService);
+                $scope.$broadcast('ModalChanged');
             });
         };
 
@@ -28,7 +26,8 @@ Garage.controller("IndexController", ['$scope', '$sce', 'getVehicles', 'getVehic
             getCreatePersonPage.then(function (data) {
                 ModalService.setModalTitle('Create Owner');
                 ModalService.setModal(data);
-                jQuery('#ModalContainer').modal('toggle');
+                //$rootScope.$broadcast('ModalChanged');
+                $scope.$broadcast('ModalChanged');
             });
         };
         
@@ -40,11 +39,18 @@ Garage.controller("IndexController", ['$scope', '$sce', 'getVehicles', 'getVehic
             //console.log($scope.vehicleTypes);
         });
 
-        getVehicles.then(function (data) {
-            $scope.Vehicles = data;
-            //console.log("Controller Log Start!\n" + $scope.Vehicles + "\n Controller Log End!");
-        });
+        var getvs = function () {
+            getVehicles.then(function (data) {
+                $scope.Vehicles = data;
+                //console.log("Controller Log Start!\n" + $scope.Vehicles + "\n Controller Log End!");
+            });
+        };
 
+        $scope.$on('VehiclesChanged', function () {
+            getvs();
+        })
+
+        getvs();
         
     }]
 );
