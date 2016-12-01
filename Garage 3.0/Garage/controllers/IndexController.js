@@ -14,22 +14,7 @@ Garage.controller("IndexController", ['$scope', '$rootScope', '$sce', 'getVehicl
             { 'Name': 'Color', 'Value': 'Color' }
         ];
 
-        $scope.OpenCreateVehicleModal = function () {
-            getCreateVehiclePage.then(function (data) {
-                ModalService.setModalTitle('Create Vehicle');
-                ModalService.setModal(data);//$sce.trustAsHtml(data);
-                $scope.$broadcast('ModalChanged');
-            });
-        };
-
-        $scope.OpenCreateOwnerModal = function () {
-            getCreatePersonPage.then(function (data) {
-                ModalService.setModalTitle('Create Owner');
-                ModalService.setModal(data);
-                //$rootScope.$broadcast('ModalChanged');
-                $scope.$broadcast('ModalChanged');
-            });
-        };
+        
         
         $scope.defaultSelectedOption = $scope.sortOptions[0].Value;
         // Sorting End

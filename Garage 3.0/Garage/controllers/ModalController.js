@@ -8,7 +8,24 @@ Garage.controller("ModalController", ['$scope', '$sce', '$timeout', 'getCreateVe
         $scope.ModalTitle = ModalService.ModalTitle;
         $scope.ModalBody = ModalService.ModalBody;
 
-        
+        $scope.OpenCreateVehicleModal = function () {
+            
+
+            getCreateVehiclePage.then(function (data) {
+                ModalService.setModalTitle('Create Vehicle');
+                ModalService.setModal(data);//$sce.trustAsHtml(data);
+                $scope.$broadcast('ModalChanged');
+            });
+        };
+
+        $scope.OpenCreateOwnerModal = function () {
+            getCreatePersonPage.then(function (data) {
+                ModalService.setModalTitle('Create Owner');
+                ModalService.setModal(data);
+                //$rootScope.$broadcast('ModalChanged');
+                $scope.$broadcast('ModalChanged');
+            });
+        };
 
         var modalchanged = $scope.$on('ModalChanged', function () {
             jQuery('#ModalLabel').html(ModalService.ModalTitle);
