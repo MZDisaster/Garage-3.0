@@ -1,0 +1,56 @@
+﻿@model Garage_3._0.ViewModels.VehicleCreateViewModel
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ModalLabel">Create Vehicle</h4>
+            </div>
+            <div class="modal-body" id="ModalBody">
+                <form id="modalForm">
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.RegNr, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.RegNr, new { htmlAttributes = new { @class = "form-control", ng_model = "Vehicle.RegNr" } })
+                                @Html.ValidationMessageFor(model => model.RegNr, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control", ng_model = "Vehicle.Color" } })
+                                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OwnerId, "OwnerId", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("OwnerId", null, htmlAttributes: new { @class = "form-control", ng_model = "Vehicle.OwnerId" })
+                                @Html.ValidationMessageFor(model => model.OwnerId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VehicleTypeId, "VehicleTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("VehicleTypeId", null, htmlAttributes: new { @class = "form-control", ng_model = "Vehicle.VehicleType" })
+                                @Html.ValidationMessageFor(model => model.VehicleTypeId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" form="modalForm" ng-click="createthevehicle()">Save changes</button>
+        </div>
+    </div>
+</div>
